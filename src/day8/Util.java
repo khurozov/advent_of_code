@@ -8,7 +8,7 @@ class Util {
         long n = 0;
         while (!current.endsWith(end)) {
             Pair p = map.get(current);
-            current = dirs[(int) (n % dirs.length)] == 'L' ? p.left : p.right;
+            current = dirs[(int) (n % dirs.length)] == 'L' ? p.left() : p.right();
 
             n++;
         }

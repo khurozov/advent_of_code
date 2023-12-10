@@ -25,8 +25,8 @@ public class Part2_v1 {
         long d = Long.parseLong(sb.toString());
 
         double sqrt = Math.sqrt(Math.pow(t, 2) - 4 * d);
-        int left = (int) Math.ceil((t-sqrt)/2);
-        int right = (int) Math.floor((t+sqrt)/2);
-        System.out.println(right-left+1);
+        int left = (int) Math.ceil((t - sqrt) / 2);
+        int right = (int) Math.floor((t + sqrt) / 2);
+        System.out.println(right - left + 1);
     }
 }

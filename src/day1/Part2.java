@@ -28,7 +28,7 @@ public class Part2 {
                             last = num;
                         }
                     }
-                    return map.getOrDefault(first, 0)*10 + map.getOrDefault(last, 0);
+                    return map.getOrDefault(first, 0) * 10 + map.getOrDefault(last, 0);
                 })
                 .reduce(0, Integer::sum);
 
@@ -37,24 +37,24 @@ public class Part2 {
 
     private static Map<String, Integer> str2IntMap() {
         Map<String, Integer> map = new HashMap<>();
-        map.put("1",        1);
-        map.put("2",        2);
-        map.put("3",        3);
-        map.put("4",        4);
-        map.put("5",        5);
-        map.put("6",        6);
-        map.put("7",        7);
-        map.put("8",        8);
-        map.put("9",        9);
-        map.put("seven",    7);
-        map.put("one",      1);
-        map.put("two",      2);
-        map.put("three",    3);
-        map.put("four",     4);
-        map.put("five",     5);
-        map.put("six",      6);
-        map.put("eight",    8);
-        map.put("nine",     9);
+        map.put("1", 1);
+        map.put("2", 2);
+        map.put("3", 3);
+        map.put("4", 4);
+        map.put("5", 5);
+        map.put("6", 6);
+        map.put("7", 7);
+        map.put("8", 8);
+        map.put("9", 9);
+        map.put("seven", 7);
+        map.put("one", 1);
+        map.put("two", 2);
+        map.put("three", 3);
+        map.put("four", 4);
+        map.put("five", 5);
+        map.put("six", 6);
+        map.put("eight", 8);
+        map.put("nine", 9);
         return map;
     }
 }

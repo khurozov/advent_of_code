@@ -26,7 +26,7 @@ public class Part2_v0 {
 
         int n = 0;
         for (int i = 1; i < t; i++) {
-            if ((t-i)*i > d) n++;
+            if ((t - i) * i > d) n++;
         }
         System.out.println(n);
     }

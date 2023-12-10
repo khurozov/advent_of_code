@@ -19,28 +19,28 @@ public class Part1 {
         long min = getDestinations(
                 in,
                 getDestinations(
-                    in,
-                    getDestinations(
                         in,
                         getDestinations(
-                            in,
-                            getDestinations(
                                 in,
                                 getDestinations(
-                                    in,
-                                    getDestinations(
                                         in,
-                                        seeds
-                                    ) // seed-to-soil
-                                ) // soil-to-fertilizer
-                            ) // fertilizer-to-water
-                        ) // water-to-light
-                    ) // light-to-temperature
+                                        getDestinations(
+                                                in,
+                                                getDestinations(
+                                                        in,
+                                                        getDestinations(
+                                                                in,
+                                                                seeds
+                                                        ) // seed-to-soil
+                                                ) // soil-to-fertilizer
+                                        ) // fertilizer-to-water
+                                ) // water-to-light
+                        ) // light-to-temperature
                 ) // temperature-to-humidity
-            ) // humidity-to-location
-            .stream()
-            .min(Long::compareTo)
-            .orElse(-1L);
+        ) // humidity-to-location
+                .stream()
+                .min(Long::compareTo)
+                .orElse(-1L);
 
         System.out.println(min);
     }
@@ -62,7 +62,7 @@ public class Part1 {
                 long s = iterator.next();
 
                 if (s >= sStart && s < sStart + length) {
-                    destinations.add(s+diff);
+                    destinations.add(s + diff);
                     iterator.remove();
                 }
             }

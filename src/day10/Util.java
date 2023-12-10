@@ -28,19 +28,19 @@ class Util {
                 if (pipes[i][j].c() == 'S') {
                     if (i > 0 && pipes[i - 1][j].hasSouth()) {
                         // go north
-                        return findPathHelper(pipes, i-1, j, Direction.SOUTH);
+                        return findPathHelper(pipes, i - 1, j, Direction.SOUTH);
                     }
-                    if (i < pipes.length -1 && pipes[i + 1][j].hasNorth()) {
+                    if (i < pipes.length - 1 && pipes[i + 1][j].hasNorth()) {
                         // can go south
-                        return findPathHelper(pipes, i+1, j, Direction.NORTH);
+                        return findPathHelper(pipes, i + 1, j, Direction.NORTH);
                     }
-                    if (j > 0 && pipes[i][j-1].hasEast()) {
+                    if (j > 0 && pipes[i][j - 1].hasEast()) {
                         // can go west
-                        return findPathHelper(pipes, i, j-1, Direction.EAST);
+                        return findPathHelper(pipes, i, j - 1, Direction.EAST);
                     }
-                    if (j < pipes[i].length -1 && pipes[i][j+1].hasWest()) {
+                    if (j < pipes[i].length - 1 && pipes[i][j + 1].hasWest()) {
                         // can go east
-                        return findPathHelper(pipes, i, j+1, Direction.WEST);
+                        return findPathHelper(pipes, i, j + 1, Direction.WEST);
                     }
                 }
             }

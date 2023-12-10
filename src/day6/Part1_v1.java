@@ -25,9 +25,9 @@ public class Part1_v1 {
         int mul = 1;
         for (int i = 0; i < t.size(); i++) {
             double sqrt = Math.sqrt(Math.pow(t.get(i), 2) - 4 * d.get(i));
-            int left = (int) Math.ceil((t.get(i)-sqrt)/2);
-            int right = (int) Math.floor((t.get(i)+sqrt)/2);
-            mul *= (right-left+1);
+            int left = (int) Math.ceil((t.get(i) - sqrt) / 2);
+            int right = (int) Math.floor((t.get(i) + sqrt) / 2);
+            mul *= (right - left + 1);
         }
         System.out.println(mul);
     }

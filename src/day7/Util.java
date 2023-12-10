@@ -9,7 +9,7 @@ class Util {
         HashMap<Character, Integer> cardCount = new HashMap<>();
 
         for (char c : cards.toCharArray()) {
-            cardCount.compute(c, (k,v) -> v == null ? 1 : v+1);
+            cardCount.compute(c, (k, v) -> v == null ? 1 : v + 1);
         }
 
         return cardCount;
@@ -84,13 +84,13 @@ class Util {
 
     static Comparator<CardHand> getComparator(HashMap<Character, Integer> strength) {
         return (ch1, ch2) -> {
-            if (ch1.score != ch2.score) {
-                return ch1.score.ordinal() - ch2.score.ordinal();
+            if (ch1.score() != ch2.score()) {
+                return ch1.score().ordinal() - ch2.score().ordinal();
             }
 
             for (int i = 0; i < 5; i++) {
-                char c1 = ch1.cards.charAt(i);
-                char c2 = ch2.cards.charAt(i);
+                char c1 = ch1.cards().charAt(i);
+                char c2 = ch2.cards().charAt(i);
 
                 if (c1 != c2) {
                     return strength.get(c1) - strength.get(c2);

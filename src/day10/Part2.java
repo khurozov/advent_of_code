@@ -20,7 +20,7 @@ public class Part2 {
         for (int i = 0; i < pipes.length; i++) {
             for (int j = 0; j < pipes[i].length; j++) {
                 Coordinate coordinate = new Coordinate(i, j);
-                if (polygon.contains(i,j) && !path.contains(coordinate)) {
+                if (polygon.contains(i, j) && !path.contains(coordinate)) {
                     enclosedByLoop.add(coordinate);
                 }
             }
@@ -53,7 +53,7 @@ public class Part2 {
                     g.setColor(Color.YELLOW);
 
                     for (Coordinate c : enclosedByLoop) {
-                        g.fillRect((int) (c.x()*scale - scale/2), (int) (c.y()*scale - scale/2), (int) scale, (int) scale);
+                        g.fillRect((int) (c.x() * scale - scale / 2), (int) (c.y() * scale - scale / 2), (int) scale, (int) scale);
                     }
                 }
             }

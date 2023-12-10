@@ -21,29 +21,29 @@ public class Part2 {
         long min = getDestinations(
                 in,
                 getDestinations(
-                    in,
-                    getDestinations(
                         in,
                         getDestinations(
-                            in,
-                            getDestinations(
                                 in,
                                 getDestinations(
-                                    in,
-                                    getDestinations(
                                         in,
-                                        seeds
-                                    ) // seed-to-soil
-                                ) // soil-to-fertilizer
-                            ) // fertilizer-to-water
-                        ) // water-to-light
-                    ) // light-to-temperature
+                                        getDestinations(
+                                                in,
+                                                getDestinations(
+                                                        in,
+                                                        getDestinations(
+                                                                in,
+                                                                seeds
+                                                        ) // seed-to-soil
+                                                ) // soil-to-fertilizer
+                                        ) // fertilizer-to-water
+                                ) // water-to-light
+                        ) // light-to-temperature
                 ) // temperature-to-humidity
-            ) // humidity-to-location
-            .stream()
-            .map(p -> p.left)
-            .min(Long::compareTo)
-            .orElse(-1L);
+        ) // humidity-to-location
+                .stream()
+                .map(p -> p.left)
+                .min(Long::compareTo)
+                .orElse(-1L);
 
         System.out.println(min);
     }
@@ -73,22 +73,22 @@ public class Part2 {
                 iter.remove();
 
                 if (sLeft == p.left && sRight >= p.right) {
-                    destinations.add(new Pair(dLeft, p.right+diff));
+                    destinations.add(new Pair(dLeft, p.right + diff));
                 } else if (sLeft == p.left) {
                     destinations.add(new Pair(dLeft, dRight));
-                    toAdd.add(new Pair(sRight+1, p.right));
+                    toAdd.add(new Pair(sRight + 1, p.right));
                 } else if (sLeft > p.left && sRight >= p.right) {
-                    toAdd.add(new Pair(p.left, sLeft-1));
-                    destinations.add(new Pair(dLeft, p.right+diff));
+                    toAdd.add(new Pair(p.left, sLeft - 1));
+                    destinations.add(new Pair(dLeft, p.right + diff));
                 } else if (sLeft > p.left) {
-                    toAdd.add(new Pair(p.left, sLeft-1));
+                    toAdd.add(new Pair(p.left, sLeft - 1));
                     destinations.add(new Pair(dLeft, dRight));
-                    toAdd.add(new Pair(sRight+1, p.right));
+                    toAdd.add(new Pair(sRight + 1, p.right));
                 } else if (sRight >= p.right) {
-                    destinations.add(new Pair(p.left+diff, p.right+diff));
+                    destinations.add(new Pair(p.left + diff, p.right + diff));
                 } else {
-                    destinations.add(new Pair(p.left+diff, dRight));
-                    toAdd.add(new Pair(sRight+1, p.right));
+                    destinations.add(new Pair(p.left + diff, dRight));
+                    toAdd.add(new Pair(sRight + 1, p.right));
                 }
             }
             sources.addAll(toAdd);

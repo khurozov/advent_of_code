@@ -26,7 +26,7 @@ public class Part1_v0 {
         for (int i = 0; i < t.size(); i++) {
             int n = 0;
             for (Integer j = 1; j < t.get(i); j++) {
-                if ((t.get(i)-j)*j > d.get(i)) n++;
+                if ((t.get(i) - j) * j > d.get(i)) n++;
             }
             mul *= n;
         }

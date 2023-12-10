@@ -2,7 +2,7 @@ package day10;
 
 enum Direction {
     NORTH(-1, 0),
-    SOUTH(1,  0),
+    SOUTH(1, 0),
     EAST(0, 1),
     WEST(0, -1),
     UNKNOWN(0, 0);
