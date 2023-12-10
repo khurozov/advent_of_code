@@ -71,10 +71,10 @@ class Util {
         return coordinates;
     }
 
-    static Polygon pathToPolygon(LinkedList<Coordinate> path, int scale) {
+    static Polygon pathToPolygon(LinkedList<Coordinate> path) {
         Polygon polygon = new Polygon();
         for (Coordinate coordinate : path) {
-            polygon.addPoint(coordinate.x()*scale, coordinate.y()*scale);
+            polygon.addPoint(coordinate.x(), coordinate.y());
         }
         return polygon;
     }
