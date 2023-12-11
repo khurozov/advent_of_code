@@ -7,7 +7,15 @@ import java.util.ArrayList;
 
 public class Day11 {
     public static void main(String[] args) throws IOException {
+        part1();
+        part2();
+    }
+
+    private static void part1() throws IOException {
         solve(2);
+    }
+
+    private static void part2() throws IOException {
         solve(1000000);
     }
 
@@ -60,5 +68,22 @@ public class Day11 {
             }
         }
         return galaxies;
+    }
+
+    private record Galaxy(int i, int j) {
+        long distance(Galaxy g, boolean[] hasGRow, boolean[] hasGCol, int expand) {
+            long d = 0;
+            int max = Math.max(this.i, g.i);
+            int min = Math.min(this.i, g.i);
+            for (int x = min; x < max; x++) {
+                d += hasGRow[x] ? 1 : expand;
+            }
+            max = Math.max(this.j, g.j);
+            min = Math.min(this.j, g.j);
+            for (int x = min; x < max; x++) {
+                d += hasGCol[x] ? 1 : expand;
+            }
+            return d;
+        }
     }
 }
