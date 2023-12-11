@@ -1,36 +1,40 @@
-package day5;
-
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Scanner;
 
-public class Part2 {
+public class Day5 {
+    private record Pair(long left, long right) {
+    }
+
     public static void main(String[] args) throws IOException {
-        Scanner in = new Scanner(Path.of("src", "day5", "input"));
-        LinkedList<Pair> seeds = new LinkedList<>();
+        part1();
+        part2();
+    }
+
+    private static void part1() throws IOException {
+        Scanner in = new Scanner(Path.of("src", "Day5.txt"));
+        LinkedList<Long> seeds = new LinkedList<>();
 
         in.next();
         while (in.hasNextLong()) {
-            long seed = in.nextLong();
-            long len = in.nextLong();
-            seeds.add(new Pair(seed, seed + len - 1));
+            seeds.add(in.nextLong());
         }
 
-        long min = getDestinations(
+        long min = getDestinationsPart1(
                 in,
-                getDestinations(
+                getDestinationsPart1(
                         in,
-                        getDestinations(
+                        getDestinationsPart1(
                                 in,
-                                getDestinations(
+                                getDestinationsPart1(
                                         in,
-                                        getDestinations(
+                                        getDestinationsPart1(
                                                 in,
-                                                getDestinations(
+                                                getDestinationsPart1(
                                                         in,
-                                                        getDestinations(
+                                                        getDestinationsPart1(
                                                                 in,
                                                                 seeds
                                                         ) // seed-to-soil
@@ -41,14 +45,80 @@ public class Part2 {
                 ) // temperature-to-humidity
         ) // humidity-to-location
                 .stream()
-                .map(p -> p.left)
                 .min(Long::compareTo)
                 .orElse(-1L);
 
         System.out.println(min);
     }
 
-    private static LinkedList<Pair> getDestinations(Scanner in, LinkedList<Pair> sources) {
+    private static void part2() throws IOException {
+        Scanner in = new Scanner(Path.of("src", "Day5.txt"));
+        LinkedList<Pair> seeds = new LinkedList<>();
+
+        in.next();
+        while (in.hasNextLong()) {
+            long seed = in.nextLong();
+            long len = in.nextLong();
+            seeds.add(new Pair(seed, seed + len - 1));
+        }
+
+        long min = getDestinationsPart2(
+                in,
+                getDestinationsPart2(
+                        in,
+                        getDestinationsPart2(
+                                in,
+                                getDestinationsPart2(
+                                        in,
+                                        getDestinationsPart2(
+                                                in,
+                                                getDestinationsPart2(
+                                                        in,
+                                                        getDestinationsPart2(
+                                                                in,
+                                                                seeds
+                                                        ) // seed-to-soil
+                                                ) // soil-to-fertilizer
+                                        ) // fertilizer-to-water
+                                ) // water-to-light
+                        ) // light-to-temperature
+                ) // temperature-to-humidity
+        ) // humidity-to-location
+                .stream()
+                .map(Pair::left)
+                .min(Long::compareTo)
+                .orElse(-1L);
+
+        System.out.println(min);
+    }
+
+    private static LinkedList<Long> getDestinationsPart1(Scanner in, LinkedList<Long> sources) {
+        in.next();
+        in.next();
+
+        LinkedList<Long> destinations = new LinkedList<>();
+        while (in.hasNextLong()) {
+            long dStart = in.nextLong();
+            long sStart = in.nextLong();
+            long length = in.nextLong();
+            long diff = dStart - sStart;
+
+            if (sources.isEmpty()) continue;
+            Iterator<Long> iterator = sources.iterator();
+            while (iterator.hasNext()) {
+                long s = iterator.next();
+
+                if (s >= sStart && s < sStart + length) {
+                    destinations.add(s + diff);
+                    iterator.remove();
+                }
+            }
+        }
+        destinations.addAll(sources);
+        return destinations;
+    }
+
+    private static LinkedList<Pair> getDestinationsPart2(Scanner in, LinkedList<Pair> sources) {
         in.next();
         in.next();
 
@@ -96,15 +166,5 @@ public class Part2 {
 
         destinations.addAll(sources);
         return destinations;
-    }
-
-    private static class Pair {
-        long left;
-        long right;
-
-        public Pair(long left, long right) {
-            this.left = left;
-            this.right = right;
-        }
     }
 }

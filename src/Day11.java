@@ -1,25 +1,41 @@
-package day11;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 
 public class Day11 {
+
+    private record Galaxy(int i, int j) {
+        long distance(Galaxy g, boolean[] hasGRow, boolean[] hasGCol, int expand) {
+            long d = 0;
+            int max = Math.max(this.i, g.i);
+            int min = Math.min(this.i, g.i);
+            for (int x = min; x < max; x++) {
+                d += hasGRow[x] ? 1 : expand;
+            }
+            max = Math.max(this.j, g.j);
+            min = Math.min(this.j, g.j);
+            for (int x = min; x < max; x++) {
+                d += hasGCol[x] ? 1 : expand;
+            }
+            return d;
+        }
+    }
+
     public static void main(String[] args) throws IOException {
         part1();
         part2();
     }
 
     private static void part1() throws IOException {
-        solve(2);
+        System.out.println(getDistanceSum(2));
     }
 
     private static void part2() throws IOException {
-        solve(1000000);
+        System.out.println(getDistanceSum(1000000));
     }
 
-    private static void solve(int expand) throws IOException {
+    private static long getDistanceSum(int expansion) throws IOException {
         char[][] m = readInput();
         boolean[][] hasG = hasG(m);
         ArrayList<Galaxy> galaxies = readGalaxies(m);
@@ -27,16 +43,16 @@ public class Day11 {
         long sum = 0;
         for (int i = 0; i < galaxies.size(); i++) {
             Galaxy g = galaxies.get(i);
-            for (int j = i+1; j < galaxies.size(); j++) {
-                sum += g.distance(galaxies.get(j), hasG[0], hasG[1], expand);
+            for (int j = i + 1; j < galaxies.size(); j++) {
+                sum += g.distance(galaxies.get(j), hasG[0], hasG[1], expansion);
             }
         }
-        System.out.println(sum);
+        return sum;
     }
 
 
     private static char[][] readInput() throws IOException {
-        return Files.readAllLines(Path.of("src", "day11", "input"))
+        return Files.readAllLines(Path.of("src", "Day11.txt"))
                 .stream()
                 .map(String::toCharArray)
                 .toArray(char[][]::new);
@@ -68,22 +84,5 @@ public class Day11 {
             }
         }
         return galaxies;
-    }
-
-    private record Galaxy(int i, int j) {
-        long distance(Galaxy g, boolean[] hasGRow, boolean[] hasGCol, int expand) {
-            long d = 0;
-            int max = Math.max(this.i, g.i);
-            int min = Math.min(this.i, g.i);
-            for (int x = min; x < max; x++) {
-                d += hasGRow[x] ? 1 : expand;
-            }
-            max = Math.max(this.j, g.j);
-            min = Math.min(this.j, g.j);
-            for (int x = min; x < max; x++) {
-                d += hasGCol[x] ? 1 : expand;
-            }
-            return d;
-        }
     }
 }
