@@ -1,10 +1,10 @@
 package solutions.y2023;
 
 import extra.Pair;
+import extra.Util;
 import solutions.Solution;
 
 import java.io.IOException;
-import java.nio.file.Files;
 import java.util.ArrayList;
 
 public class Day11 extends Solution {
@@ -26,7 +26,7 @@ public class Day11 extends Solution {
     }
 
     private long getDistanceSum(int expansion) throws IOException {
-        char[][] m = readInput();
+        char[][] m = Util.inputAsCharGrid(this.inputFile());
         boolean[][] hasG = hasG(m);
         ArrayList<Pair<Integer>> galaxies = readGalaxies(m);
 
@@ -38,13 +38,6 @@ public class Day11 extends Solution {
             }
         }
         return sum;
-    }
-
-    private char[][] readInput() throws IOException {
-        return Files.readAllLines(this.inputFile())
-                .stream()
-                .map(String::toCharArray)
-                .toArray(char[][]::new);
     }
 
     private static boolean[][] hasG(char[][] input) {

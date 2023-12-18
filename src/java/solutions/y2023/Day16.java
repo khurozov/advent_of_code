@@ -4,8 +4,6 @@ import extra.Direction;
 import extra.Util;
 import solutions.Solution;
 
-import java.io.IOException;
-import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -19,12 +17,12 @@ public class Day16 extends Solution {
 
     @Override
     public void part1() throws Exception {
-        System.out.println(light(input(), Direction.RIGHT, 0, -1));
+        System.out.println(light(Util.inputAsCharGrid(this.inputFile()), Direction.RIGHT, 0, -1));
     }
 
     @Override
     public void part2() throws Exception {
-        char[][] map = input();
+        char[][] map = Util.inputAsCharGrid(this.inputFile());
 
         long sum = 0;
 
@@ -39,13 +37,6 @@ public class Day16 extends Solution {
         }
 
         System.out.println(sum);
-    }
-
-    private char[][] input() throws IOException {
-        return Files.readAllLines(this.inputFile())
-                .stream()
-                .map(String::toCharArray)
-                .toArray(char[][]::new);
     }
 
     private static long light(char[][] map, Direction cur, int iStart, int jStart) {

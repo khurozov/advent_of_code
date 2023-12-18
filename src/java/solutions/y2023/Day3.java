@@ -3,8 +3,6 @@ package solutions.y2023;
 import extra.Util;
 import solutions.Solution;
 
-import java.io.IOException;
-import java.nio.file.Files;
 import java.util.HashSet;
 
 public class Day3 extends Solution {
@@ -16,7 +14,7 @@ public class Day3 extends Solution {
 
     @Override
     public void part1() throws Exception {
-        char[][] c = readInput();
+        char[][] c = Util.inputAsCharGrid(this.inputFile());
 
         HashSet<String> set = new HashSet<>();
         int sum = 0;
@@ -67,7 +65,7 @@ public class Day3 extends Solution {
 
     @Override
     public void part2() throws Exception {
-        char[][] c = readInput();
+        char[][] c = Util.inputAsCharGrid(this.inputFile());
 
         HashSet<String> set = new HashSet<>();
         int sum = 0;
@@ -145,13 +143,6 @@ public class Day3 extends Solution {
         }
 
         System.out.println(sum);
-    }
-
-    private char[][] readInput() throws IOException {
-        return Files.readAllLines(this.inputFile())
-                .stream()
-                .map(String::toCharArray)
-                .toArray(char[][]::new);
     }
 
     private static int firstLeftNonDigitIndex(char[] row, int x) {

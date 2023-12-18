@@ -1,9 +1,8 @@
 package solutions.y2023;
 
+import extra.Util;
 import solutions.Solution;
 
-import java.io.IOException;
-import java.nio.file.Files;
 import java.util.LinkedList;
 
 public class Day14 extends Solution {
@@ -15,23 +14,16 @@ public class Day14 extends Solution {
 
     @Override
     public void part1() throws Exception {
-        char[][] data = readInput();
+        char[][] data = Util.inputAsCharGrid(this.inputFile());
         moveToNorth(data);
         System.out.println(loadSum(data));
     }
 
     @Override
     public void part2() throws Exception {
-        char[][] data = readInput();
+        char[][] data = Util.inputAsCharGrid(this.inputFile());
         cycle(data);
         System.out.println(loadSum(data));
-    }
-
-    private char[][] readInput() throws IOException {
-        return Files.readAllLines(this.inputFile())
-                .stream()
-                .map(String::toCharArray)
-                .toArray(char[][]::new);
     }
 
     private static int loadSum(char[][] data) {
