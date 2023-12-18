@@ -1,25 +1,31 @@
+package solutions.y2023;
+
+import solutions.Solution;
+
 import java.io.IOException;
-import java.nio.file.Path;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Scanner;
 
-public class Day13 {
-    public static void main(String[] args) throws IOException {
-        part1();
-        part2();
+public class Day13 extends Solution {
+    public static void main(String[] args) throws Exception {
+        Day13 day13 = new Day13();
+        day13.part1();
+        day13.part2();
     }
 
-    private static void part1() throws IOException {
+    @Override
+    public void part1() throws Exception {
         System.out.println(detectMirrors(0));
     }
 
-    private static void part2() throws IOException {
+    @Override
+    public void part2() throws Exception {
         System.out.println(detectMirrors(1));
     }
 
-    private static int detectMirrors(int maxErr) throws IOException {
-        Scanner in = new Scanner(Path.of("src", "Day13.txt"));
+    private int detectMirrors(int maxErr) throws IOException {
+        Scanner in = new Scanner(this.inputFile());
         int sum = 0;
         LinkedList<String> list = new LinkedList<>();
 
@@ -37,7 +43,7 @@ public class Day13 {
         return sum;
     }
 
-    private static char[][] parsePattern(LinkedList<String> list){
+    private static char[][] parsePattern(LinkedList<String> list) {
         char[][] a = new char[list.size()][];
 
         for (int i = 0; i < list.size(); i++) {

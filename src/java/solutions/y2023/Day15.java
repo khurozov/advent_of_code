@@ -1,29 +1,26 @@
+package solutions.y2023;
+
+import extra.Lens;
+import solutions.Solution;
+
 import java.io.IOException;
-import java.nio.file.Path;
 import java.util.*;
 
-public class Day15 {
-    private static class Lens {
-        String label;
-        int focalLength;
-
-        public Lens(String label, int focalLength) {
-            this.label = label;
-            this.focalLength = focalLength;
-        }
+public class Day15 extends Solution {
+    public static void main(String[] args) throws Exception {
+        Day15 day15 = new Day15();
+        day15.part1();
+        day15.part2();
     }
 
-    public static void main(String[] args) throws IOException {
-        part1();
-        part2();
-    }
-
-    private static void part1() throws IOException {
+    @Override
+    public void part1() throws Exception {
         Integer sum = input().stream().map(Day15::hash).reduce(0, Integer::sum);
         System.out.println(sum);
     }
 
-    private static void part2() throws IOException {
+    @Override
+    public void part2() throws Exception {
         HashMap<Integer, List<Lens>> boxes = new HashMap<>();
 
         input().forEach(s -> {
@@ -35,7 +32,7 @@ public class Day15 {
                 if (list != null) {
                     Iterator<Lens> iterator = list.iterator();
                     while (iterator.hasNext()) {
-                        if (iterator.next().label.equals(s)) {
+                        if (iterator.next().getLabel().equals(s)) {
                             iterator.remove();
                         }
                     }
@@ -53,8 +50,8 @@ public class Day15 {
                         boolean set = false;
                         while (iterator.hasNext()) {
                             Lens lens = iterator.next();
-                            if (lens.label.equals(label)) {
-                                lens.focalLength = focalLength;
+                            if (lens.getLabel().equals(label)) {
+                                lens.setFocalLength(focalLength);
                                 set = true;
                             }
                         }
@@ -73,15 +70,15 @@ public class Day15 {
             List<Lens> lenses = box.getValue();
             for (int i = 0; i < lenses.size(); i++) {
                 Lens lens = lenses.get(i);
-                sum += b * (i + 1) * lens.focalLength;
+                sum += b * (i + 1) * lens.getFocalLength();
             }
         }
 
         System.out.println(sum);
     }
 
-    private static List<String> input() throws IOException {
-        Scanner in = new Scanner(Path.of("src", "Day15.txt"));
+    private List<String> input() throws IOException {
+        Scanner in = new Scanner(this.inputFile());
         in.useDelimiter(",");
 
         List<String> list = new ArrayList<>();

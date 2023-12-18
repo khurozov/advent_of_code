@@ -1,28 +1,34 @@
+package solutions.y2023;
+
+import solutions.Solution;
+
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.LinkedList;
 
-public class Day14 {
-    public static void main(String[] args) throws IOException {
-        part1();
-        part2();
+public class Day14 extends Solution {
+    public static void main(String[] args) throws Exception {
+        Day14 day14 = new Day14();
+        day14.part1();
+        day14.part2();
     }
 
-    private static void part1() throws IOException {
+    @Override
+    public void part1() throws Exception {
         char[][] data = readInput();
         moveToNorth(data);
         System.out.println(loadSum(data));
     }
 
-    private static void part2() throws IOException {
+    @Override
+    public void part2() throws Exception {
         char[][] data = readInput();
         cycle(data);
         System.out.println(loadSum(data));
     }
 
-    private static char[][] readInput() throws IOException {
-        return Files.readAllLines(Path.of("src", "Day14.txt"))
+    private char[][] readInput() throws IOException {
+        return Files.readAllLines(this.inputFile())
                 .stream()
                 .map(String::toCharArray)
                 .toArray(char[][]::new);

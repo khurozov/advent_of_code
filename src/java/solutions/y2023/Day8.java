@@ -1,24 +1,29 @@
+package solutions.y2023;
+
+import extra.Pair;
+import solutions.Solution;
+
 import java.io.IOException;
-import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class Day8 {
-    private record Pair(String left, String right) {
+public class Day8 extends Solution {
+
+    public static void main(String[] args) throws Exception {
+        Day8 day8 = new Day8();
+        day8.part1();
+        day8.part2();
     }
 
-    public static void main(String[] args) throws IOException {
-        part1();
-        part2();
-    }
-
-    private static void part1() throws IOException {
+    @Override
+    public void part1() throws Exception {
         System.out.println(steps(readDirections(), readMap(), "AAA", "ZZZ"));
     }
 
-    private static void part2() throws IOException {
+    @Override
+    public void part2() throws Exception {
         char[] directions = readDirections();
-        HashMap<String, Pair> map = readMap();
+        HashMap<String, Pair<String>> map = readMap();
 
         long n = map.keySet()
                 .stream()
@@ -39,34 +44,34 @@ public class Day8 {
         System.out.println(n);
     }
 
-    private static char[] readDirections() throws IOException {
-        Scanner in = new Scanner(Path.of("src", "Day8.txt"));
+    private char[] readDirections() throws IOException {
+        Scanner in = new Scanner(this.inputFile());
 
         return in.nextLine().toCharArray();
     }
 
-    private static HashMap<String, Pair> readMap() throws IOException {
-        Scanner in = new Scanner(Path.of("src", "Day8.txt"));
+    private HashMap<String, Pair<String>> readMap() throws IOException {
+        Scanner in = new Scanner(this.inputFile());
 
         in.nextLine();
         in.nextLine();
 
-        HashMap<String, Pair> map = new HashMap<>();
+        HashMap<String, Pair<String>> map = new HashMap<>();
 
         while (in.hasNextLine()) {
             String[] points = in.nextLine().split("[ =(),]+");
 
-            map.put(points[0], new Pair(points[1], points[2]));
+            map.put(points[0], Pair.of(points[1], points[2]));
         }
 
         return map;
     }
 
-    private static long steps(char[] dirs, HashMap<String, Pair> map, String start, String end) {
+    private static long steps(char[] dirs, HashMap<String, Pair<String>> map, String start, String end) {
         String current = start;
         long n = 0;
         while (!current.endsWith(end)) {
-            Pair p = map.get(current);
+            Pair<String> p = map.get(current);
             current = dirs[(int) (n % dirs.length)] == 'L' ? p.left() : p.right();
 
             n++;

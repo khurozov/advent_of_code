@@ -1,30 +1,24 @@
+package solutions.y2023;
+
+import extra.CardHand;
+import extra.CardScore;
+import solutions.Solution;
+
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.List;
 import java.util.function.Function;
 
-public class Day7 {
-    private record CardHand(String cards, long bid, CardScore score) {
+public class Day7 extends Solution {
+    public static void main(String[] args) throws Exception {
+        Day7 day7 = new Day7();
+        day7.part1();
+        day7.part2();
     }
 
-    private enum CardScore {
-        HIGH_CARD,
-        ONE_PAIR,
-        TWO_PAIR,
-        THREE_OF_A_KIND,
-        FULL_HOUSE,
-        FOUR_OF_A_KIND,
-        FIVE_OF_A_KIND
-    }
-
-    public static void main(String[] args) throws IOException {
-        part1();
-        part2();
-    }
-
-    private static void part1() throws IOException {
+    @Override
+    public void part1() throws Exception {
         HashMap<Character, Integer> strengthMap = new HashMap<>();
         strengthMap.put('A', 13);
         strengthMap.put('K', 12);
@@ -43,7 +37,8 @@ public class Day7 {
         System.out.println(getTotalWinnings(strengthMap, Day7::getScoreWithoutJoker));
     }
 
-    private static void part2() throws IOException {
+    @Override
+    public void part2() throws Exception {
         HashMap<Character, Integer> strengthMap = new HashMap<>();
         strengthMap.put('A', 13);
         strengthMap.put('K', 12);
@@ -62,8 +57,8 @@ public class Day7 {
         System.out.println(getTotalWinnings(strengthMap, Day7::getScoreWithJoker));
     }
 
-    private static long getTotalWinnings(HashMap<Character, Integer> strengthMap, Function<HashMap<Character, Integer>, CardScore> cardScoreFunction) throws IOException {
-        List<CardHand> cardHands = Files.readAllLines(Path.of("src", "Day7.txt"))
+    private long getTotalWinnings(HashMap<Character, Integer> strengthMap, Function<HashMap<Character, Integer>, CardScore> cardScoreFunction) throws IOException {
+        List<CardHand> cardHands = Files.readAllLines(this.inputFile())
                 .stream()
                 .map(input -> {
                     String[] s = input.split(" ");

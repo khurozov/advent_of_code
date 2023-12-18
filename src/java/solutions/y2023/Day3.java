@@ -1,15 +1,21 @@
+package solutions.y2023;
+
+import extra.Util;
+import solutions.Solution;
+
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.HashSet;
 
-public class Day3 {
-    public static void main(String[] args) throws IOException {
-        part1();
-        part2();
+public class Day3 extends Solution {
+    public static void main(String[] args) throws Exception {
+        Day3 day3 = new Day3();
+        day3.part1();
+        day3.part2();
     }
 
-    private static void part1() throws IOException {
+    @Override
+    public void part1() throws Exception {
         char[][] c = readInput();
 
         HashSet<String> set = new HashSet<>();
@@ -17,37 +23,37 @@ public class Day3 {
 
         for (int i = 0; i < c.length; i++) {
             for (int j = 0; j < c[i].length; j++) {
-                if (c[i][j] != '.' && !isDigit(c[i][j])) {
+                if (c[i][j] != '.' && !Util.isDigit(c[i][j])) {
                     //top
                     if (i > 0) {
-                        if (isDigit(c[i - 1][j])) {
+                        if (Util.isDigit(c[i - 1][j])) {
                             sum += numCenter(c, j, i - 1, set);
                         } else {
-                            if (j > 0 && isDigit(c[i - 1][j - 1])) {
+                            if (j > 0 && Util.isDigit(c[i - 1][j - 1])) {
                                 sum += numLeft(c, j - 1, i - 1, set);
                             }
-                            if (j + 1 < c[i - 1].length && isDigit(c[i - 1][j + 1])) {
+                            if (j + 1 < c[i - 1].length && Util.isDigit(c[i - 1][j + 1])) {
                                 sum += numRight(c, j + 1, i - 1, set);
                             }
                         }
                     }
                     //left
-                    if (j > 0 && isDigit(c[i][j - 1])) {
+                    if (j > 0 && Util.isDigit(c[i][j - 1])) {
                         sum += numLeft(c, j - 1, i, set);
                     }
                     //right
-                    if (j + 1 < c[i].length && isDigit(c[i][j + 1])) {
+                    if (j + 1 < c[i].length && Util.isDigit(c[i][j + 1])) {
                         sum += numRight(c, j + 1, i, set);
                     }
                     // bottom
                     if (i + 1 < c.length) {
-                        if (isDigit(c[i + 1][j])) {
+                        if (Util.isDigit(c[i + 1][j])) {
                             sum += numCenter(c, j, i + 1, set);
                         } else {
-                            if (j > 0 && isDigit(c[i + 1][j - 1])) {
+                            if (j > 0 && Util.isDigit(c[i + 1][j - 1])) {
                                 sum += numLeft(c, j - 1, i + 1, set);
                             }
-                            if (j + 1 < c[i + 1].length && isDigit(c[i + 1][j + 1])) {
+                            if (j + 1 < c[i + 1].length && Util.isDigit(c[i + 1][j + 1])) {
                                 sum += numRight(c, j + 1, i + 1, set);
                             }
                         }
@@ -59,7 +65,8 @@ public class Day3 {
         System.out.println(sum);
     }
 
-    private static void part2() throws IOException {
+    @Override
+    public void part2() throws Exception {
         char[][] c = readInput();
 
         HashSet<String> set = new HashSet<>();
@@ -71,13 +78,13 @@ public class Day3 {
                     int first = -1;
                     //top
                     if (i > 0) {
-                        if (isDigit(c[i - 1][j])) {
+                        if (Util.isDigit(c[i - 1][j])) {
                             first = numCenter(c, j, i - 1, set);
                         } else {
-                            if (j > 0 && isDigit(c[i - 1][j - 1])) {
+                            if (j > 0 && Util.isDigit(c[i - 1][j - 1])) {
                                 first = numLeft(c, j - 1, i - 1, set);
                             }
-                            if (j + 1 < c[i - 1].length && isDigit(c[i - 1][j + 1])) {
+                            if (j + 1 < c[i - 1].length && Util.isDigit(c[i - 1][j + 1])) {
                                 int num = numRight(c, j + 1, i - 1, set);
                                 if (first == -1) {
                                     first = num;
@@ -89,7 +96,7 @@ public class Day3 {
                         }
                     }
                     //left
-                    if (j > 0 && isDigit(c[i][j - 1])) {
+                    if (j > 0 && Util.isDigit(c[i][j - 1])) {
                         int num = numLeft(c, j - 1, i, set);
                         if (first == -1) {
                             first = num;
@@ -99,7 +106,7 @@ public class Day3 {
                         }
                     }
                     //right
-                    if (j + 1 < c[i].length && isDigit(c[i][j + 1])) {
+                    if (j + 1 < c[i].length && Util.isDigit(c[i][j + 1])) {
                         int num = numRight(c, j + 1, i, set);
                         if (first == -1) {
                             first = num;
@@ -110,13 +117,13 @@ public class Day3 {
                     }
                     // bottom
                     if (i + 1 < c.length) {
-                        if (isDigit(c[i + 1][j])) {
+                        if (Util.isDigit(c[i + 1][j])) {
                             int num = numCenter(c, j, i + 1, set);
                             if (first != -1) {
                                 sum += first * num;
                             }
                         } else {
-                            if (j > 0 && isDigit(c[i + 1][j - 1])) {
+                            if (j > 0 && Util.isDigit(c[i + 1][j - 1])) {
                                 int num = numLeft(c, j - 1, i + 1, set);
                                 if (first == -1) {
                                     first = num;
@@ -125,7 +132,7 @@ public class Day3 {
                                     continue;
                                 }
                             }
-                            if (j + 1 < c[i + 1].length && isDigit(c[i + 1][j + 1])) {
+                            if (j + 1 < c[i + 1].length && Util.isDigit(c[i + 1][j + 1])) {
                                 int num = numRight(c, j + 1, i + 1, set);
                                 if (first != -1) {
                                     sum += first * num;
@@ -140,20 +147,16 @@ public class Day3 {
         System.out.println(sum);
     }
 
-    static char[][] readInput() throws IOException {
-        return Files.readAllLines(Path.of("src", "Day3.txt"))
+    private char[][] readInput() throws IOException {
+        return Files.readAllLines(this.inputFile())
                 .stream()
                 .map(String::toCharArray)
                 .toArray(char[][]::new);
     }
 
-    static boolean isDigit(char x) {
-        return x >= '0' && x <= '9';
-    }
-
-    static int firstLeftNonDigitIndex(char[] row, int x) {
+    private static int firstLeftNonDigitIndex(char[] row, int x) {
         for (int i = x - 1; i >= 0; i--) {
-            if (!isDigit(row[i])) {
+            if (!Util.isDigit(row[i])) {
                 return i;
             }
         }
@@ -161,9 +164,9 @@ public class Day3 {
         return -1;
     }
 
-    static int firstRightNonDigitIndex(char[] row, int x) {
+    private static int firstRightNonDigitIndex(char[] row, int x) {
         for (int i = x + 1; i < row.length; i++) {
-            if (!isDigit(row[i])) {
+            if (!Util.isDigit(row[i])) {
                 return i;
             }
         }
@@ -171,7 +174,7 @@ public class Day3 {
         return row.length;
     }
 
-    static int getInt(char[] row, int before, int after) {
+    private static int getInt(char[] row, int before, int after) {
         int n = 0;
         for (int i = before + 1; i < after; i++) {
             n = n * 10 + row[i] - '0';
@@ -180,7 +183,7 @@ public class Day3 {
         return n;
     }
 
-    static int numCenter(char[][] c, int x, int y, HashSet<String> set) {
+    private static int numCenter(char[][] c, int x, int y, HashSet<String> set) {
         int before = firstLeftNonDigitIndex(c[y], x);
         int after = firstRightNonDigitIndex(c[y], x);
         String key = y + ":" + before;
@@ -191,7 +194,7 @@ public class Day3 {
         return 0;
     }
 
-    static int numLeft(char[][] c, int x, int y, HashSet<String> set) {
+    private static int numLeft(char[][] c, int x, int y, HashSet<String> set) {
         int before = firstLeftNonDigitIndex(c[y], x);
         String key = y + ":" + before;
         if (!set.contains(key)) {
@@ -201,7 +204,7 @@ public class Day3 {
         return 0;
     }
 
-    static int numRight(char[][] c, int x, int y, HashSet<String> set) {
+    private static int numRight(char[][] c, int x, int y, HashSet<String> set) {
         int after = firstRightNonDigitIndex(c[y], x);
         String key = y + ":" + x;
         if (!set.contains(key)) {

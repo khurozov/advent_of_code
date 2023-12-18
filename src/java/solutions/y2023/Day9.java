@@ -1,24 +1,30 @@
+package solutions.y2023;
+
+import solutions.Solution;
+
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.function.Function;
 
-public class Day9 {
-    public static void main(String[] args) throws IOException {
-        part1();
-        part2();
+public class Day9 extends Solution {
+    public static void main(String[] args) throws Exception {
+        Day9 day9 = new Day9();
+        day9.part1();
+        day9.part2();
     }
 
-    private static void part1() throws IOException {
+    @Override
+    public void part1() throws Exception {
         System.out.println(getExtraNum(Day9::nextExtraNum));
     }
 
-    private static void part2() throws IOException {
+    @Override
+    public void part2() throws Exception {
         System.out.println(getExtraNum(Day9::prevExtraNum));
     }
 
-    private static long getExtraNum(Function<long[], Long> extraNumFun) throws IOException {
-        return Files.readAllLines(Path.of("src", "Day9.txt"))
+    private long getExtraNum(Function<long[], Long> extraNumFun) throws IOException {
+        return Files.readAllLines(this.inputFile())
                 .stream()
                 .map(input -> {
                     String[] s = input.split(" ");

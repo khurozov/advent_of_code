@@ -1,20 +1,22 @@
-import java.io.IOException;
-import java.nio.file.Path;
+package solutions.y2023;
+
+import solutions.Solution;
+import extra.Pair;
+
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Scanner;
 
-public class Day5 {
-    private record Pair(long left, long right) {
+public class Day5 extends Solution {
+    public static void main(String[] args) throws Exception {
+        Day5 day5 = new Day5();
+        day5.part1();
+        day5.part2();
     }
 
-    public static void main(String[] args) throws IOException {
-        part1();
-        part2();
-    }
-
-    private static void part1() throws IOException {
-        Scanner in = new Scanner(Path.of("src", "Day5.txt"));
+    @Override
+    public void part1() throws Exception {
+        Scanner in = new Scanner(this.inputFile());
         LinkedList<Long> seeds = new LinkedList<>();
 
         in.next();
@@ -51,15 +53,16 @@ public class Day5 {
         System.out.println(min);
     }
 
-    private static void part2() throws IOException {
-        Scanner in = new Scanner(Path.of("src", "Day5.txt"));
-        LinkedList<Pair> seeds = new LinkedList<>();
+    @Override
+    public void part2() throws Exception {
+        Scanner in = new Scanner(this.inputFile());
+        LinkedList<Pair<Long>> seeds = new LinkedList<>();
 
         in.next();
         while (in.hasNextLong()) {
             long seed = in.nextLong();
             long len = in.nextLong();
-            seeds.add(new Pair(seed, seed + len - 1));
+            seeds.add(Pair.of(seed, seed + len - 1));
         }
 
         long min = getDestinationsPart2(
@@ -92,7 +95,7 @@ public class Day5 {
         System.out.println(min);
     }
 
-    private static LinkedList<Long> getDestinationsPart1(Scanner in, LinkedList<Long> sources) {
+    private LinkedList<Long> getDestinationsPart1(Scanner in, LinkedList<Long> sources) {
         in.next();
         in.next();
 
@@ -118,11 +121,11 @@ public class Day5 {
         return destinations;
     }
 
-    private static LinkedList<Pair> getDestinationsPart2(Scanner in, LinkedList<Pair> sources) {
+    private LinkedList<Pair<Long>> getDestinationsPart2(Scanner in, LinkedList<Pair<Long>> sources) {
         in.next();
         in.next();
 
-        LinkedList<Pair> destinations = new LinkedList<>();
+        LinkedList<Pair<Long>> destinations = new LinkedList<>();
 
         while (in.hasNextLong()) {
             long dLeft = in.nextLong();
@@ -132,33 +135,33 @@ public class Day5 {
             long dRight = dLeft + len - 1;
             long sRight = sLeft + len - 1;
 
-            LinkedList<Pair> toAdd = new LinkedList<>();
-            Iterator<Pair> iter = sources.iterator();
+            LinkedList<Pair<Long>> toAdd = new LinkedList<>();
+            Iterator<Pair<Long>> iter = sources.iterator();
 
             while (iter.hasNext()) {
-                Pair p = iter.next();
+                Pair<Long> p = iter.next();
 
-                if (p.right < sLeft) continue;
-                if (p.left > sRight) continue;
+                if (p.right() < sLeft) continue;
+                if (p.left() > sRight) continue;
                 iter.remove();
 
-                if (sLeft == p.left && sRight >= p.right) {
-                    destinations.add(new Pair(dLeft, p.right + diff));
-                } else if (sLeft == p.left) {
-                    destinations.add(new Pair(dLeft, dRight));
-                    toAdd.add(new Pair(sRight + 1, p.right));
-                } else if (sLeft > p.left && sRight >= p.right) {
-                    toAdd.add(new Pair(p.left, sLeft - 1));
-                    destinations.add(new Pair(dLeft, p.right + diff));
-                } else if (sLeft > p.left) {
-                    toAdd.add(new Pair(p.left, sLeft - 1));
-                    destinations.add(new Pair(dLeft, dRight));
-                    toAdd.add(new Pair(sRight + 1, p.right));
-                } else if (sRight >= p.right) {
-                    destinations.add(new Pair(p.left + diff, p.right + diff));
+                if (sLeft == p.left() && sRight >= p.right()) {
+                    destinations.add(Pair.of(dLeft, p.right() + diff));
+                } else if (sLeft == p.left()) {
+                    destinations.add(Pair.of(dLeft, dRight));
+                    toAdd.add(Pair.of(sRight + 1, p.right()));
+                } else if (sLeft > p.left() && sRight >= p.right()) {
+                    toAdd.add(Pair.of(p.left(), sLeft - 1));
+                    destinations.add(Pair.of(dLeft, p.right() + diff));
+                } else if (sLeft > p.left()) {
+                    toAdd.add(Pair.of(p.left(), sLeft - 1));
+                    destinations.add(Pair.of(dLeft, dRight));
+                    toAdd.add(Pair.of(sRight + 1, p.right()));
+                } else if (sRight >= p.right()) {
+                    destinations.add(Pair.of(p.left() + diff, p.right() + diff));
                 } else {
-                    destinations.add(new Pair(p.left + diff, dRight));
-                    toAdd.add(new Pair(sRight + 1, p.right));
+                    destinations.add(Pair.of(p.left() + diff, dRight));
+                    toAdd.add(Pair.of(sRight + 1, p.right()));
                 }
             }
             sources.addAll(toAdd);

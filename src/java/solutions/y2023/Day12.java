@@ -1,40 +1,44 @@
+package solutions.y2023;
+
+import extra.SpringData;
+import solutions.Solution;
+
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
-public class Day12 {
-    private record SpringData(char[] c, int[] g) {
+public class Day12 extends Solution {
+    public static void main(String[] args) throws Exception {
+        Day12 day12 = new Day12();
+        day12.part1();
+        day12.part2();
     }
 
-    public static void main(String[] args) throws IOException {
-        part1();
-        part2();
+    @Override
+    public void part1() throws Exception {
+        System.out.println(getSumOfArrangements(data -> arrangements(data.c(), 0, data.g(), 0, new HashMap<>())));
     }
 
-    private static void part1() throws IOException {
-        System.out.println(getSumOfArrangements(data -> arrangements(data.c, 0, data.g, 0, new HashMap<>())));
-    }
-
-    private static void part2() throws IOException {
+    @Override
+    public void part2() throws Exception {
         System.out.println(getSumOfArrangements(data -> {
-            char[] c = new char[data.c.length*5+4];
-            int[] g = new int[data.g.length*5];
+            char[] c = new char[data.c().length * 5 + 4];
+            int[] g = new int[data.g().length * 5];
             for (int i = 0; i < 5; i++) {
                 if (i > 0) {
-                    c[(data.c.length+1)*i-1] = '?';
+                    c[(data.c().length + 1) * i - 1] = '?';
                 }
-                System.arraycopy(data.c, 0, c, (data.c.length+1)*i, data.c.length);
-                System.arraycopy(data.g, 0, g, data.g.length*i, data.g.length);
+                System.arraycopy(data.c(), 0, c, (data.c().length + 1) * i, data.c().length);
+                System.arraycopy(data.g(), 0, g, data.g().length * i, data.g().length);
             }
             return arrangements(c, 0, g, 0, new HashMap<>());
         }));
     }
 
-    private static long getSumOfArrangements(Function<SpringData, Long> arrangementFunc) throws IOException {
-        return Files.readAllLines(Path.of("src", "Day12.txt"))
+    private long getSumOfArrangements(Function<SpringData, Long> arrangementFunc) throws IOException {
+        return Files.readAllLines(this.inputFile())
                 .stream()
                 .map(input -> {
                     String[] s = input.split(" ");
@@ -64,7 +68,7 @@ public class Day12 {
 
         if (c[i] == '.') {
             m = arrangements(c, i + 1, g, j, mem);
-            mem.put(i+":"+j, m);
+            mem.put(i + ":" + j, m);
             return m;
         }
         if (c[i] == '#') {
@@ -72,7 +76,7 @@ public class Day12 {
         }
         if (c[i] == '?') {
             m = arrangements(c, i + 1, g, j, mem) + withSpring(c, i, g, j, mem);
-            mem.put(i+":"+j, m);
+            mem.put(i + ":" + j, m);
             return m;
         }
         throw new IllegalArgumentException();
@@ -88,8 +92,8 @@ public class Day12 {
             if (c[k + i] == '.') return 0;
         }
 
-        if (x+i == c.length) {
-            if (j+1 == g.length) return 1;
+        if (x + i == c.length) {
+            if (j + 1 == g.length) return 1;
             return 0;
         }
 

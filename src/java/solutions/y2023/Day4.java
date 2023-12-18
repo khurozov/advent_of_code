@@ -1,20 +1,24 @@
-import java.io.IOException;
+package solutions.y2023;
+
+import solutions.Solution;
+
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.TreeMap;
 import java.util.stream.Stream;
 
-public class Day4 {
-    public static void main(String[] args) throws IOException {
-        part1();
-        part2();
+public class Day4 extends Solution {
+    public static void main(String[] args) throws Exception {
+        Day4 day4 = new Day4();
+        day4.part1();
+        day4.part2();
     }
 
-    private static void part1() throws IOException {
-        long sum = Files.readAllLines(Path.of("src", "Day4.txt"))
+    @Override
+    public void part1() throws Exception {
+        long sum = Files.readAllLines(this.inputFile())
                 .stream()
                 .map(input -> {
                     String[] all = input.substring(10).split(" \\| ");
@@ -28,8 +32,9 @@ public class Day4 {
         System.out.println(sum);
     }
 
-    private static void part2() throws IOException {
-        long sum = Files.readAllLines(Path.of("src", "Day4.txt"))
+    @Override
+    public void part2() throws Exception {
+        long sum = Files.readAllLines(this.inputFile())
                 .stream()
                 .map(input -> {
                     String[] parts = input.split("[: ]+", 3);

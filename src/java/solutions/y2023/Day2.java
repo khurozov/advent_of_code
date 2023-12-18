@@ -1,16 +1,21 @@
+package solutions.y2023;
+
+import solutions.Solution;
+
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.function.Function;
 
-public class Day2 {
-    public static void main(String[] args) throws IOException {
-        part1();
-        part2();
+public class Day2 extends Solution {
+    public static void main(String[] args) throws Exception {
+        Day2 day2 = new Day2();
+        day2.part1();
+        day2.part2();
     }
 
-    private static void part1() throws IOException {
+    @Override
+    public void part1() throws Exception {
         HashMap<String, Integer> limitByColor = new HashMap<>();
         limitByColor.put("red", 12);
         limitByColor.put("green", 13);
@@ -27,7 +32,8 @@ public class Day2 {
         }));
     }
 
-    private static void part2() throws IOException {
+    @Override
+    public void part2() throws Exception {
         System.out.println(getSum(input -> {
             String[] s = input.substring(input.indexOf(':') + 2).split("[;, ]+");
             HashMap<String, Integer> map = new HashMap<>();
@@ -39,8 +45,8 @@ public class Day2 {
         }));
     }
 
-    private static int getSum(Function<String, Integer> gameToAddendFunc) throws IOException {
-        return Files.readAllLines(Path.of("src", "Day2.txt"))
+    private int getSum(Function<String, Integer> gameToAddendFunc) throws IOException {
+        return Files.readAllLines(this.inputFile())
                 .stream()
                 .map(gameToAddendFunc)
                 .reduce(0, Integer::sum);

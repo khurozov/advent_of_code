@@ -1,28 +1,34 @@
+package solutions.y2023;
+
+import extra.Util;
+import solutions.Solution;
+
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
-public class Day1 {
-    public static void main(String[] args) throws IOException {
-        part1();
-        part2();
+public class Day1 extends Solution {
+    public static void main(String[] args) throws Exception {
+        Day1 day1 = new Day1();
+        day1.part1();
+        day1.part2();
     }
 
-    private static void part1() throws IOException {
+    @Override
+    public void part1() throws Exception {
         System.out.println(calibrationValuesSum(input -> {
             char[] chars = input.toCharArray();
             int n = 0;
             for (char c : chars) {
-                if (isDigit(c)) {
+                if (Util.isDigit(c)) {
                     n += (c - '0') * 10;
                     break;
                 }
             }
             for (int i = chars.length - 1; i >= 0; --i) {
-                if (isDigit(chars[i])) {
+                if (Util.isDigit(chars[i])) {
                     n += chars[i] - '0';
                     break;
                 }
@@ -32,7 +38,8 @@ public class Day1 {
         }));
     }
 
-    private static void part2() throws IOException {
+    @Override
+    public void part2() throws Exception {
         Map<String, Integer> map = new HashMap<>();
         map.put("seven", 7);
         map.put("one", 1);
@@ -67,14 +74,10 @@ public class Day1 {
         }));
     }
 
-    private static int calibrationValuesSum(Function<String, Integer> calibrationValueReader) throws IOException {
-        return Files.readAllLines(Path.of("src", "Day1.txt"))
+    private int calibrationValuesSum(Function<String, Integer> calibrationValueReader) throws IOException {
+        return Files.readAllLines(this.inputFile())
                 .stream()
                 .map(calibrationValueReader)
                 .reduce(0, Integer::sum);
-    }
-
-    private static boolean isDigit(char c) {
-        return c >= '0' && c <= '9';
     }
 }
