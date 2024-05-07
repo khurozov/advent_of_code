@@ -9,9 +9,9 @@ import java.util.TreeSet;
 
 public class Day13 extends Solution {
     public static void main(String[] args) throws Exception {
-        Day13 day1 = new Day13();
-        day1.part1();
-        day1.part2();
+        Day13 day13 = new Day13();
+        day13.part1();
+        day13.part2();
     }
 
     private final TreeMap<String, TreeMap<String, Integer>> happinessMap;

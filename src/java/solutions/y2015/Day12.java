@@ -8,9 +8,9 @@ import java.util.regex.Pattern;
 
 public class Day12 extends Solution {
     public static void main(String[] args) throws Exception {
-        Day12 day1 = new Day12();
-        day1.part1();
-        day1.part2();
+        Day12 day12 = new Day12();
+        day12.part1();
+        day12.part2();
     }
 
     @Override

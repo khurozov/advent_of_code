@@ -9,9 +9,9 @@ import java.util.HashMap;
 
 public class Day7 extends Solution {
     public static void main(String[] args) throws Exception {
-        Day7 day1 = new Day7();
-        day1.part1();
-        day1.part2();
+        Day7 day7 = new Day7();
+        day7.part1();
+        day7.part2();
     }
 
     @Override

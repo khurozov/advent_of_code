@@ -8,9 +8,9 @@ import java.util.HashSet;
 
 public class Day3 extends Solution {
     public static void main(String[] args) throws Exception {
-        Day3 day1 = new Day3();
-        day1.part1();
-        day1.part2();
+        Day3 day3 = new Day3();
+        day3.part1();
+        day3.part2();
     }
 
     @Override

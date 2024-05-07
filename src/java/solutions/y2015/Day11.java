@@ -13,9 +13,9 @@ public class Day11 extends Solution {
     private final TreeSet<String> s322;
     private static final List<Character> deniedChars = List.of('i', 'o', 'l');
     public static void main(String[] args) throws Exception {
-        Day11 day1 = new Day11();
-        day1.part1();
-        day1.part2();
+        Day11 day11 = new Day11();
+        day11.part1();
+        day11.part2();
     }
 
     public Day11() {

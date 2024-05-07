@@ -8,9 +8,9 @@ import java.util.*;
 
 public class Day9 extends Solution {
     public static void main(String[] args) throws Exception {
-        Day9 day1 = new Day9();
-        day1.part1();
-        day1.part2();
+        Day9 day9 = new Day9();
+        day9.part1();
+        day9.part2();
     }
 
     private final TreeMap<String, TreeMap<String, Integer>> routeMap;

@@ -11,9 +11,9 @@ import java.util.function.Function;
 
 public class Day4 extends Solution {
     public static void main(String[] args) throws Exception {
-        Day4 day1 = new Day4();
-        day1.part1();
-        day1.part2();
+        Day4 day4 = new Day4();
+        day4.part1();
+        day4.part2();
     }
 
     @Override

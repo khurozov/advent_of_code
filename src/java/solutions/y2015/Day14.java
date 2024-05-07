@@ -21,9 +21,9 @@ public class Day14 extends Solution {
     };
 
     public static void main(String[] args) throws Exception {
-        Day14 day1 = new Day14();
-        day1.part1();
-        day1.part2();
+        Day14 day14 = new Day14();
+        day14.part1();
+        day14.part2();
     }
 
     @Override

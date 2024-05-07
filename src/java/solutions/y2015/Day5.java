@@ -10,9 +10,9 @@ import java.util.regex.Pattern;
 
 public class Day5 extends Solution {
     public static void main(String[] args) throws Exception {
-        Day5 day1 = new Day5();
-        day1.part1();
-        day1.part2();
+        Day5 day5 = new Day5();
+        day5.part1();
+        day5.part2();
     }
 
     @Override

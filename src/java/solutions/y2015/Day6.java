@@ -10,9 +10,9 @@ import java.util.function.Function;
 
 public class Day6 extends Solution {
     public static void main(String[] args) throws Exception {
-        Day6 day1 = new Day6();
-        day1.part1();
-        day1.part2();
+        Day6 day6 = new Day6();
+        day6.part1();
+        day6.part2();
     }
 
     @Override

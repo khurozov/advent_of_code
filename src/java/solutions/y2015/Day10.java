@@ -6,9 +6,9 @@ import java.nio.file.Files;
 
 public class Day10 extends Solution {
     public static void main(String[] args) throws Exception {
-        Day10 day1 = new Day10();
-        day1.part1();
-        day1.part2();
+        Day10 day10 = new Day10();
+        day10.part1();
+        day10.part2();
     }
 
     @Override
